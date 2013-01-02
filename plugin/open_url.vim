@@ -29,7 +29,7 @@ function! s:OpenURL()
   ruby open_url
 endfunction
 
-command! OpenURL call <SID>OpenURL()
+command! -range OpenURL execute '<line1>,<line2>call <SID>OpenURL()'
 
 if !hasmapto('OpenURL')
   map <leader>u :OpenURL<CR>
