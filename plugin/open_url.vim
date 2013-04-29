@@ -20,5 +20,5 @@ endfunction
 command! -range OpenURL execute '<line1>,<line2>call <SID>OpenURL()'
 
 if !hasmapto('OpenURL')
-  map <leader>u :OpenURL<CR>
+  noremap <leader>u :OpenURL<CR>
 end
