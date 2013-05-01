@@ -3,34 +3,24 @@ if exists("g:loaded_open_url")
 endif
 let g:loaded_open_url = 1
 
-if !has("ruby")
-  echohl ErrorMsg
-  echon "Sorry, the 'Open URL' plugin requires Ruby support."
-  finish
-end
+let s:url_re='\c\v%(<|>)(%([a-z][[:alnum:]-]+:%(/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)%([^[:space:]()<>]+|\(([^[:space:]()<>]+|(\([^[:space:]()<>]+\)))*\))+%(\(([^[:space:]()<>]+|(\([^[:space:]()<>]+\)))*\)|[^[:space:]`!()\[\]{};:''".,<>?«»“”‘’]))'
 
-ruby << EOF
-  def open_url
-    re = %r{(?i)\b((?:[a-z][\w-]+:(?:/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\((?:[^\s()<>]+|(?:\([^\s()<>]+\)))*\))+(?:\((?:[^\s()<>]+|(?:\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))}
-
-    line = VIM::Buffer.current.line
-    urls = line.scan(re).flatten
-
-    if urls.empty?
-      VIM::message("No URL found in line.")
-    else
-      system("open", *urls)
-      VIM::message(urls.join(" and "))
-    end
-  end
-EOF
+function! s:GetURL(lineno)
+  return matchstr(getline(a:lineno), s:url_re)
+endfunction
 
 function! s:OpenURL()
-  ruby open_url
+  let l:url = s:GetURL(line('.'))
+  if l:url == ""
+    echom "No url found in line."
+  else
+    call system("open " . shellescape(l:url))
+    echom l:url
+  endif
 endfunction
 
 command! -range OpenURL execute '<line1>,<line2>call <SID>OpenURL()'
 
 if !hasmapto('OpenURL')
-  map <leader>u :OpenURL<CR>
+  noremap <leader>u :OpenURL<CR>
 end
