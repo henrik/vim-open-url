@@ -3,6 +3,10 @@ if exists("g:loaded_open_url")
 endif
 let g:loaded_open_url = 1
 
+if !exists("g:open_url_browser")
+    let g:open_url_browser="open"
+endif
+
 if !has("ruby")
   echohl ErrorMsg
   echon "Sorry, the 'Open URL' plugin requires Ruby support."
@@ -19,7 +23,7 @@ ruby << EOF
     if urls.empty?
       VIM::message("No URL found in line.")
     else
-      system("open", *urls)
+      system(VIM::evaluate("g:open_url_browser"), *urls)
       VIM::message(urls.join(" and "))
     end
   end
