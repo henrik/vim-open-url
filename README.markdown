@@ -1,6 +1,6 @@
 # Open URL plugin for Vim
 
-Opens URLs on the current line in your OS X default browser.
+Opens URLs on the current line in your <s>OS X</s> Unix default browser.
 
 Also handles other URIs, e.g. from Spotify.
 
@@ -11,7 +11,12 @@ Uses John Gruber's excellent [URL regexp](http://daringfireball.net/2010/07/impr
 
 ## Caveats
 
-OS X only (uses `open`).
+<s>OS X only (uses `open`).</s>
+
+By default vim-open-url uses `open` (mac only), but it is possible to set the
+browser on your vimrc:
+
+    let g:open_url_browser="firefox"
 
 Requires Vim to be compiled with Ruby support. I started porting the regexp to Vim syntax, then gave up before I could hurt myself.
 
