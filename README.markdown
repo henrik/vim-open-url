@@ -1,6 +1,6 @@
 # Open URL plugin for Vim
 
-Opens URLs on the current line, with OS X `open` or another command you specify.
+Opens URLs on the current line in your default browser via the OS X `open` command, or another command you specify.
 
 Also handles other URIs, e.g. from Spotify.
 
