@@ -26,6 +26,18 @@ Two URLs, one line: http://example.com/#foo and http://example.com/?foo=bar#baz
 
 Spotify URI: spotify:track:6JEK0CvvjDjjMUBFoXShNZ
 
+
+## There is already a `gx` in Vim 7.4!
+
+I wrote this plugin before I discovered `gx`, but the plugin still has some benefits:
+
+* You can be anywhere on the line
+* If the same line has multiple URLs, it opens all of them
+* It opens other URIs, e.g. from Spotify
+
+`gx` has some benefits over this plugin, though, such as cross-platform support and more configurability.
+
+
 ## Credits and license
 
 By [Henrik Nyh](http://henrik.nyh.se/) under the MIT license:
