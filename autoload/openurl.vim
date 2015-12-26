@@ -17,5 +17,3 @@ EOF
 function! openurl#OpenURL()
   ruby open_url
 endfunction
-
-
